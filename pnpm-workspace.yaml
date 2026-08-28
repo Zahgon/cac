@@ -5,4 +5,7 @@ allowBuilds:
   esbuild: false
   simple-git-hooks: true
 
+minimumReleaseAgeExclude:
+  - simple-git-hooks@2.14.0
+
 shellEmulator: true
