@@ -39,7 +39,7 @@ export class Option {
 
         return camelcaseOptionName(name)
       })
-      .sort((a, b) => (a.length > b.length ? 1 : -1)) // Sort names
+      .sort((a, b) => a.length - b.length) // Sort names
 
     // Use the longest name (last one) as actual option name
     this.name = this.names.at(-1)!

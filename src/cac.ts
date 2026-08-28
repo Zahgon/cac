@@ -324,10 +324,10 @@ export class CAC extends EventTarget {
     }
 
     // Set option values (support dot-nested property name)
-    for (const key of Object.keys(parsed)) {
+    for (const [key, value] of Object.entries(parsed)) {
       if (key !== '_') {
         const keys = key.split('.')
-        setDotProp(options, keys, parsed[key])
+        setDotProp(options, keys, value)
         setByType(options, transforms)
       }
     }

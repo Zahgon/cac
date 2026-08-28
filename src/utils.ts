@@ -84,9 +84,7 @@ export function getMriOptions(options: Option[]): MriOptions {
 }
 
 export function findLongest(arr: string[]): string {
-  return arr.sort((a, b) => {
-    return a.length > b.length ? -1 : 1
-  })[0]
+  return arr.sort((a, b) => b.length - a.length)[0]
 }
 
 export function padRight(str: string, length: number): string {
@@ -129,9 +127,7 @@ export function setByType(
   obj: { [k: string]: any },
   transforms: { [k: string]: any },
 ): void {
-  for (const key of Object.keys(transforms)) {
-    const transform = transforms[key]
-
+  for (const [key, transform] of Object.entries(transforms)) {
     if (transform.shouldTransform) {
       obj[key] = [obj[key]].flat()
 

@@ -134,7 +134,7 @@ export class Command {
    * @param name Option name
    */
   hasOption(name: string): Option | undefined {
-    name = name.split('.')[0]
+    name = name.split('.', 1)[0]
     return this.options.find((option) => {
       return option.names.includes(name)
     })
@@ -295,7 +295,7 @@ export class Command {
     const { options: parsedOptions, globalCommand } = this.cli
     const options = [...globalCommand.options, ...this.options]
     for (const option of options) {
-      const value = parsedOptions[option.name.split('.')[0]]
+      const value = parsedOptions[option.name.split('.', 1)[0]]
       // Check required option value
       if (option.required) {
         const hasNegated = options.some(
