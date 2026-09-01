@@ -1,8 +1,0 @@
-packages:
-  - examples/browser
-
-allowBuilds:
-  esbuild: false
-  simple-git-hooks: true
-
-shellEmulator: true

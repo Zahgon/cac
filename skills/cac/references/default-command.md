@@ -2,7 +2,7 @@
 
 Use this form when the CLI's primary behavior should run with no explicit command name.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

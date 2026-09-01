@@ -2,7 +2,7 @@
 
 Use an explicitly negated option when the negative form itself should be declared and documented.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

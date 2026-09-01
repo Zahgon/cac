@@ -2,7 +2,7 @@
 
 Use a variadic positional argument when a command should accept a trailing list of values.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

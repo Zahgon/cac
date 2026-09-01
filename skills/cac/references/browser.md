@@ -2,7 +2,7 @@
 
 Use this pattern when running CAC outside Node's normal `process.argv` flow, such as in a browser demo or test harness.
 
-```ts
+```js
 import cac from 'cac'
 
 const cli = cac('browser-cli').help().version('0.0.0')

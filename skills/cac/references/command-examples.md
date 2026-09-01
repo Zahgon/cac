@@ -2,7 +2,7 @@
 
 Use command examples when help output should show concrete invocations.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

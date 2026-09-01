@@ -2,7 +2,7 @@
 
 Use command-scoped options when a flag only belongs to one command.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

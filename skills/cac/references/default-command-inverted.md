@@ -2,7 +2,7 @@
 
 Use this form when the command should have a normal visible name but also act as the default command.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

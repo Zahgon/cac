@@ -2,7 +2,7 @@
 
 Use `ignoreOptionDefaultValue` when help should show defaults but parsed output should not be prefilled.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

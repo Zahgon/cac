@@ -2,7 +2,7 @@
 
 Use this pattern for a user-facing CLI with global options, commands, default commands, help, and version output.
 
-```ts
+```js
 import { cac } from 'cac'
 
 const cli = cac()

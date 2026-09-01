@@ -48,19 +48,19 @@ Reference files mirror the canonical examples so changes have an obvious destina
 
 | Example source | Skill reference |
 | --- | --- |
-| `examples/basic-usage.ts` | `skills/cac/references/basic-usage.md` |
+| `examples/basic-usage.js` | `skills/cac/references/basic-usage.md` |
 | `examples/browser/` | `skills/cac/references/browser.md` |
-| `examples/command-examples.ts` | `skills/cac/references/command-examples.md` |
-| `examples/command-options.ts` | `skills/cac/references/command-options.md` |
-| `examples/default-command-inverted.ts` | `skills/cac/references/default-command-inverted.md` |
-| `examples/default-command.ts` | `skills/cac/references/default-command.md` |
-| `examples/deno.ts` | `skills/cac/references/deno.md` |
-| `examples/dot-nested-options.ts` | `skills/cac/references/dot-nested-options.md` |
-| `examples/help.ts` | `skills/cac/references/help.md` |
-| `examples/ignore-default-value.ts` | `skills/cac/references/ignore-default-value.md` |
-| `examples/negated-option.ts` | `skills/cac/references/negated-option.md` |
-| `examples/sub-command.ts` | `skills/cac/references/sub-command.md` |
-| `examples/variadic-arguments.ts` | `skills/cac/references/variadic-arguments.md` |
+| `examples/command-examples.js` | `skills/cac/references/command-examples.md` |
+| `examples/command-options.js` | `skills/cac/references/command-options.md` |
+| `examples/default-command-inverted.js` | `skills/cac/references/default-command-inverted.md` |
+| `examples/default-command.js` | `skills/cac/references/default-command.md` |
+| `examples/deno.js` | `skills/cac/references/deno.md` |
+| `examples/dot-nested-options.js` | `skills/cac/references/dot-nested-options.md` |
+| `examples/help.js` | `skills/cac/references/help.md` |
+| `examples/ignore-default-value.js` | `skills/cac/references/ignore-default-value.md` |
+| `examples/negated-option.js` | `skills/cac/references/negated-option.md` |
+| `examples/sub-command.js` | `skills/cac/references/sub-command.md` |
+| `examples/variadic-arguments.js` | `skills/cac/references/variadic-arguments.md` |
 
 ## How to Update Skills
 

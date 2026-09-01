@@ -2,7 +2,7 @@
 
 Use dot-nested options when users need to provide structured values from the CLI.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

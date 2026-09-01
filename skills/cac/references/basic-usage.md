@@ -2,7 +2,7 @@
 
 Use this pattern when the CLI only needs to parse free-form positional args plus global options.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

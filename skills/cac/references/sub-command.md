@@ -2,7 +2,7 @@
 
 Use this example as the broadest reference for combining multiple CAC features in one CLI.
 
-```ts
+```js
 import { cac } from 'cac'
 const cli = cac()
 

@@ -2,7 +2,7 @@
 
 Use the JSR import path when building a CAC CLI for Deno.
 
-```ts
+```js
 import { cac } from 'jsr:@cac/cac@7.0.0'
 
 const cli = cac('my-program')

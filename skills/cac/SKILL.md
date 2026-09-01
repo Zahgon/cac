@@ -7,7 +7,7 @@ description: Build and maintain command-line interfaces with CAC. Use when a tas
 
 Use CAC to build small, expressive CLIs with a compact command grammar:
 
-```ts
+```js
 import { cac } from 'cac'
 
 const cli = cac('my-cli')
@@ -60,7 +60,7 @@ Install with `pnpm add cac`.
 
 Kebab-case option names are read in camelCase:
 
-```ts
+```js
 cli.option('--clear-screen', 'Clear screen')
 // read options.clearScreen
 ```
@@ -69,7 +69,7 @@ Only the first segment is camel-cased, so `--env.API_SECRET` becomes `options.en
 
 Bare booleans already accept negation:
 
-```ts
+```js
 cli.option('--open', 'Open browser')
 // --open    -> { open: true }
 // --no-open -> { open: false }
@@ -77,7 +77,7 @@ cli.option('--open', 'Open browser')
 
 Declare an explicit negated option only when the negated form should appear in help, should default to `true`, or must pair with a required-value option:
 
-```ts
+```js
 cli
   .option('--no-config', 'Disable config file')
   .option('--config <path>', 'Use a custom config file')
@@ -91,7 +91,7 @@ For array-valued options, prefer repeated flags:
 
 CAC parses that as:
 
-```ts
+```js
 { include: ['a', 'b', 'c'] }
 ```
 
@@ -119,7 +119,7 @@ Use the reference that matches the user's task:
 
 ## Centralized Error Handling
 
-```ts
+```js
 try {
   cli.parse(process.argv, { run: false })
   await cli.runMatchedCommand()
@@ -143,7 +143,7 @@ try {
 
 ### CLI
 
-```ts
+```text
 cac(name?)
 cli.command(name, description?, config?)
 cli.option(name, description, config?)
@@ -159,7 +159,7 @@ cli.outputVersion()
 
 `cli.parse()` returns `{ args, options }` and also sets:
 
-```ts
+```text
 cli.rawArgs
 cli.args
 cli.options
@@ -169,7 +169,7 @@ cli.matchedCommandName
 
 ### Command
 
-```ts
+```text
 command.option(name, description, config?)
 command.action(callback)
 command.alias(name)
@@ -181,11 +181,13 @@ command.usage(text)
 
 Option config supports:
 
-```ts
-{
-  default?: any
-  type?: any[]
-}
+```js
+/**
+ * @typedef {object} OptionConfig
+ * @property {*} [default]   Default value for the option.
+ * @property {any[]} [type]  When `[]`, the value is returned as an array.
+ *                           May hold a conversion function, e.g. `[String]`.
+ */
 ```
 
 Use `type: []` to force array output and `type: [String]` to transform each value.

@@ -11,7 +11,7 @@
 - **Super light-weight**: No dependency, just a single file.
 - **Easy to learn**. There're only 4 APIs you need to learn for building simple CLIs: `cli.option` `cli.version` `cli.help` `cli.parse`.
 - **Yet so powerful**. Enable features like default command, git-like subcommands, validation for required arguments and options, variadic arguments, dot-nested options, automated help message generation and so on.
-- **Developer friendly**. Written in TypeScript.
+- **Developer friendly**. Written in plain JavaScript — no build step required to read or debug the source.
 
 ## Install
 
@@ -247,21 +247,20 @@ try {
 
 ### With TypeScript
 
-First you need `@types/node` to be installed as a dev dependency in your project:
-
-```bash
-npm i @types/node --dev
-```
-
-Then everything just works out of the box:
+This build is written in plain JavaScript and **does not ship type declarations** — there is
+no bundled `index.d.ts`. TypeScript consumers can still import it, but the exports will be
+untyped (`any`) unless `allowJs`/`checkJs` inference or a hand-written declaration file is
+supplied:
 
 ```js
 import { cac } from 'cac'
 ```
 
+If you need first-class type declarations, use the TypeScript build of `cac` instead.
+
 ### With Deno
 
-```ts
+```js
 import { cac } from 'jsr:@cac/cac'
 
 const cli = cac('my-program')
@@ -306,7 +305,8 @@ Create a CLI instance, optionally specify the program name which will be used to
 
 #### cli.command(name, description, config?)
 
-- Type: `(name: string, description: string) => Command`
+- **Params:** `name` `{string}`, `description` `{string}`, `config` `{object}` _(optional)_
+- **Returns:** `{Command}`
 
 Create a command instance.
 
@@ -317,7 +317,8 @@ The option also accepts a third argument `config` for additional command config:
 
 #### cli.option(name, description, config?)
 
-- Type: `(name: string, description: string, config?: OptionConfig) => CLI`
+- **Params:** `name` `{string}`, `description` `{string}`, `config` `{OptionConfig}` _(optional)_
+- **Returns:** `{CAC}`
 
 Add a global option.
 
@@ -328,51 +329,59 @@ The option also accepts a third argument `config` for additional option config:
 
 #### cli.parse(argv?)
 
-- Type: `(argv = process.argv) => ParsedArgv`
+- **Params:** `argv` `{string[]}` _(optional, defaults to `process.argv`)_
+- **Returns:** `{ParsedArgv}`
 
-```ts
-interface ParsedArgv {
-  args: string[]
-  options: {
-    [k: string]: any
-  }
-}
+```js
+/**
+ * @typedef {object} ParsedArgv
+ * @property {string[]} args   Positional arguments.
+ * @property {Object<string, *>} options   Parsed options, camelCased.
+ */
 ```
 
 When this method is called, `cli.rawArgs` `cli.args` `cli.options` `cli.matchedCommand` will also be available.
 
 #### cli.version(version, customFlags?)
 
-- Type: `(version: string, customFlags = '-v, --version') => CLI`
+- **Params:** `version` `{string}`, `customFlags` `{string}` _(optional, defaults to `'-v, --version'`)_
+- **Returns:** `{CAC}`
 
 Output version number when `-v, --version` flag appears.
 
 #### cli.help(callback?)
 
-- Type: `(callback?: HelpCallback) => CLI`
+- **Params:** `callback` `{HelpCallback}` _(optional)_
+- **Returns:** `{CAC}`
 
 Output help message when `-h, --help` flag appears.
 
 Optional `callback` allows post-processing of help text before it is displayed:
 
-```ts
-type HelpCallback = (sections: HelpSection[]) => void
+```js
+/**
+ * @typedef {object} HelpSection
+ * @property {string} [title]   Section heading; omitted for the banner section.
+ * @property {string} body      Section contents.
+ */
 
-interface HelpSection {
-  title?: string
-  body: string
-}
+/**
+ * @callback HelpCallback
+ * @param {HelpSection[]} sections
+ * @returns {void | HelpSection[]}
+ */
 ```
 
 #### cli.outputHelp()
 
-- Type: `() => CLI`
+- **Returns:** `{void}`
 
 Output help message.
 
 #### cli.usage(text)
 
-- Type: `(text: string) => CLI`
+- **Params:** `text` `{string}`
+- **Returns:** `{CAC}`
 
 Add a global usage text. This is not used by sub-commands.
 
@@ -390,49 +399,55 @@ Basically the same as `cli.option` but this adds the option to specific command.
 
 #### command.action(callback)
 
-- Type: `(callback: ActionCallback) => Command`
+- **Params:** `callback` `{ActionCallback}`
+- **Returns:** `{Command}`
 
 Use a callback function as the command action when the command matches user inputs.
 
-```ts
-type ActionCallback = (
-  // Parsed CLI args
-  // The last arg will be an array if it's a variadic argument
-  ...args: string | string[] | number | number[],
-  // Parsed CLI options
-  options: Options
-) => any
-
-interface Options {
-  [k: string]: any
-}
+```js
+/**
+ * @callback ActionCallback
+ * @param {...(string | string[] | number | number[])} args
+ *   Parsed CLI args. The last arg will be an array if it's a variadic argument.
+ *   The final parameter is always the parsed CLI options object
+ *   (`Object<string, *>`).
+ * @returns {*}
+ */
 ```
 
 #### command.alias(name)
 
-- Type: `(name: string) => Command`
+- **Params:** `name` `{string}`
+- **Returns:** `{Command}`
 
 Add an alias name to this command, the `name` here can't contain brackets.
 
 #### command.allowUnknownOptions()
 
-- Type: `() => Command`
+- **Returns:** `{Command}`
 
 Allow unknown options in this command, by default CAC will log an error when unknown options are used.
 
 #### command.example(example)
 
-- Type: `(example: CommandExample) => Command`
+- **Params:** `example` `{CommandExample}`
+- **Returns:** `{Command}`
 
 Add an example which will be displayed at the end of help message.
 
-```ts
-type CommandExample = ((name: string) => string) | string
+```js
+/**
+ * A literal example string, or a function receiving the program name
+ * and returning the example string.
+ *
+ * @typedef {((name: string) => string) | string} CommandExample
+ */
 ```
 
 #### command.usage(text)
 
-- Type: `(text: string) => Command`
+- **Params:** `text` `{string}`
+- **Returns:** `{Command}`
 
 Add a usage text for this command.
 
